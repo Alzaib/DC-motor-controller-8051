@@ -61,7 +61,7 @@ void interrupt_init (){
 	
 	/*Use timer 1 to generate an interupt at every 50ms, and use timer 0 to  create delay*/
 	TMOD = 0x11; //t1 used to create interupt of (50ms), and t0 to create delay (0001 0001)
-	TH1 = 0x4B;  //Counting from 0x4BFF to 0xFFF to takes 50ms. After 50ms Interrupt routine is called.
+	TH1 = 0x4B;  //Counting from 0x4BFF to 0xFFFF to takes 50ms. After 50ms Interrupt routine is called.
 	TL1 = 0xFF; 
 	TR1 =1; //turn on timer 1 
 	ET1 = 1; //enable timer 1 interupt
@@ -104,17 +104,17 @@ void interrupt_50ms() interrupt 3{
 *****************************************************************************/
 void main(void)
  { 
-	 interrupt_init ();		//initilize the interrupts
+   interrupt_init ();			//initilize the interrupts
    dipswitch_a = 1;			//set port 1.0, 1.1, 1.2 as input to read dipswitch value
    dipswitch_b = 1;
    dipswitch_c = 1;
    
   
    pwm_output = 0;			// set port 2.0 as output to write pwm output
-	 sw_s1_7seg = 0;
-	 sw_s2_7seg	= 0;
-	 sw_s3_7seg = 0;
-	 P0 = 0x00;						//set port 0 as output
+   sw_s1_7seg = 0;
+   sw_s2_7seg	= 0;
+   sw_s3_7seg = 0;
+   P0 = 0x00;				//set port 0 as output
     
     while (1) {
 		 switch (g_dipswitch_state){ //dip switch state machine
